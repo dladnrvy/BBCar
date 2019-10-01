@@ -17,7 +17,7 @@ public class updateService {
 	private DriverReservationDao dao;
 	
 	//취소,거절
-	public int cancleCarpoor(int r_idx) {
+	public int cancleCarpool(int r_idx) {
 		
 		dao = template.getMapper(DriverReservationDao.class);
 		
@@ -30,7 +30,7 @@ public class updateService {
 	}
 	
 		//승낙
-		public int concentCarpoor(int r_idx) {
+		public int concentCarpool(int r_idx) {
 			
 			dao = template.getMapper(DriverReservationDao.class);
 			

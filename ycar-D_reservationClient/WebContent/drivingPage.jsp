@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <!--<script src="http://localhost:3000/socket.io/socket.io.js"></script>-->
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
     <script src="https://apis.openapi.sk.com/tmap/js?version=1&format=javascript&appKey=61f9f7ec-2010-4d26-97e1-806dc10dce63"></script>
 </head>
 <style>
@@ -73,8 +73,6 @@
             console.log('r_idx 확인 : ', r_idx);
 
             socket.emit('join room', r_idx);
-            
-            alert(r_idx);
 
             socket.on('redirect', function(r_idx) {
                 console.log('redirect 리슨 ', r_idx);

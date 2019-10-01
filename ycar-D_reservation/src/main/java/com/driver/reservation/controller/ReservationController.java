@@ -103,7 +103,7 @@ public class ReservationController {
 		
 		int dr = 0;
 		
-		dr = deleteRV.deleteCarpoor(dr_idx);
+		dr = deleteRV.deleteCarpool(dr_idx);
 		
 		return dr;
 	}
@@ -115,7 +115,7 @@ public class ReservationController {
 		
 		int dr = 0;
 		
-		dr = updateRV.cancleCarpoor(r_idx);
+		dr = updateRV.cancleCarpool(r_idx);
 		
 		return dr;
 	}
@@ -127,7 +127,7 @@ public class ReservationController {
 		
 		int dr = 0;
 		
-		dr = updateRV.concentCarpoor(r_idx);
+		dr = updateRV.concentCarpool(r_idx);
 		
 		return dr;
 	}

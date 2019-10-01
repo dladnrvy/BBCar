@@ -13,7 +13,7 @@ public class deleteService {
 	private SqlSessionTemplate template;
 	private DriverReservationDao dao;
 	
-	public int deleteCarpoor(int dr_idx) {
+	public int deleteCarpool(int dr_idx) {
 		
 		dao = template.getMapper(DriverReservationDao.class);
 		
