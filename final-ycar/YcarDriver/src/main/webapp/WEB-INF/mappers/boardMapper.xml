@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ycar.driver.dao.BoardDao">
+	
+	<!-- 게시글 쓰기 -->
+	<insert id="insertBoard" parameterType="com.ycar.driver.model.board.Post">
+		insert into D_FAQ(d_idx, title, cont) 
+		values (#{d_idx},#{title},#{cont})
+	</insert>
+	
+	<!-- 글 리스트 -->
+	<select id="selectBoardList" resultType="com.ycar.driver.model.board.Board">
+		select f.faq_idx, f.title, d.nickname, f.time, f.hit
+		from D_FAQ f
+		inner join DRIVER d
+		using (d_idx)
+		order by faq_idx desc
+		limit #{param1}, #{param2}
+	</select>
+	
+	<!-- 글 전체 개수 -->
+	<select id="getListTotalCnt" resultType="int">
+		select count(*)
+		from D_FAQ
+	</select>
+	
+	<!-- 게시글 수정 -->
+	<update id="editBoard"  parameterType="com.ycar.driver.model.board.BoardEdit">
+		update D_FAQ
+		set title = ${title},
+		cont = #{cont}
+		where faq_idx = #{faq_idx}
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="delBoard">
+		delete from D_FAQ
+		where faq_idx = ${faq_idx}
+	</delete>
+	
+	<!-- 게시글 자세히 보기 -->
+	<select id="showDetailBoard" resultType="com.ycar.driver.model.board.Post">
+		SELECT f.faq_idx, f.title, d.d_idx, d.nickname, f.cont, f.time, f.hit
+		FROM D_FAQ f
+		inner join DRIVER d
+		using (d_idx)
+		where faq_idx = #{faq_idx}
+		order by faq_idx
+	</select>
+	
+	
+</mapper>

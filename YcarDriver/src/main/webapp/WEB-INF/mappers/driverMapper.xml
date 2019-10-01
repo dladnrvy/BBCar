@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ycar.driver.dao.DriverDao">
+
+<!-- 안쓰긴 하지만 혹시 몰라서 일단 resultMap 써둠 -->
+	<resultMap id="Driver" type="com.ycar.driver.model.Driver">
+		<result property="d_idx" column="d_idx"/>
+		<result property="type" column="type"/>
+		<result property="id" column="id"/>
+		<result property="pw" column="pw"/>
+		<result property="name" column="name"/>
+		<result property="nickname" column="nickname"/>
+		<result property="gender" column="gender"/>
+		<result property="verify" column="verify"/>
+		<result property="code" column="code"/>
+		<result property="email" column="email"/>
+		<result property="signout" column="signout"/>
+		<result property="ctype" column="ctype"/>
+		<result property="company" column="company"/>
+		<result property="cemail" column="cemail"/>
+		<result property="cnum" column="cnum"/>
+		<result property="lscnum" column="lscnum"/>
+		<result property="idnum1" column="idnum1"/>
+		<result property="idnum2" column="idnum2"/>
+		<result property="lsctype" column="lsctype"/>
+		<result property="sdate" column="sdate"/>
+		<result property="police" column="police"/>
+		<result property="carnum" column="carnum"/>
+		<result property="cartype" column="cartype"/>
+		<result property="d_option" column="d_option"/>
+	</resultMap>
+	
+	<select id="selectById" resultType="com.ycar.driver.model.Driver">
+		select * from DRIVER where id = #{id}
+	</select>
+	<select id="selectByIdx" resultType="com.ycar.driver.model.Driver">
+		select * from DRIVER where d_idx = #{d_idx}
+	</select>
+	<select id="selectByName" resultType="com.ycar.driver.model.Driver">
+		select * from DRIVER where name = #{name}
+	</select>
+	
+
+	<insert id="insertDriverSE" parameterType="com.ycar.driver.model.DriverSE" useGeneratedKeys="true" keyProperty="d_idx">
+		insert into DRIVER(id, pw, name, nickname, gender, type, email
+			,ctype, company, cemail
+			,lscnum, idnum1, idnum2, lsctype, sdate, police, carnum, cartype
+			,d_option					
+		)
+		values(#{id},#{pw},#{name},#{nickname},#{gender},#{type}, #{email}
+			,#{ctype},#{company},#{cemail}
+			,#{lscnum},#{idnum1},#{idnum2},#{lsctype},#{sdate},#{police},#{carnum},#{cartype}
+			,#{d_option}
+		)
+	
+	</insert>
+	<insert id="insertDriverOE" parameterType="com.ycar.driver.model.DriverOE" >
+		insert into DRIVER(id, name, nickname, gender, type, email
+				, ctype, company, cemail
+				,lscnum, idnum1, idnum2, lsctype, sdate, police, carnum, cartype
+				,d_option)
+			
+		values(#{id},#{name},#{nickname},#{gender},#{type}, #{email}
+			,#{ctype},#{company},#{cemail}
+			,#{lscnum},#{idnum1},#{idnum2},#{lsctype},#{sdate},#{police},#{carnum},#{cartype}
+			,#{d_option}
+		)
+	</insert>
+	
+	<insert id="insertDriverSP" parameterType="com.ycar.driver.model.DriverSP" useGeneratedKeys="true" keyProperty="d_idx">
+		insert into DRIVER(id, pw, name, nickname, gender, type, email
+			,ctype, company, cnum
+			,lscnum, idnum1, idnum2, lsctype, sdate, police, carnum, cartype
+			,d_option				
+		)
+		values(#{id},#{pw},#{name},#{nickname},#{gender},#{type}, #{email}
+			,#{ctype},#{company},#{cnum}
+			,#{lscnum},#{idnum1},#{idnum2},#{lsctype},#{sdate},#{police},#{carnum},#{cartype}
+			,#{d_option}
+		)
+	
+	</insert>
+	
+	<insert id="insertDriverOP" parameterType="com.ycar.driver.model.DriverOP">
+		insert into DRIVER(id, name, nickname, gender, type, email
+			,ctype, company, cnum
+			,lscnum, idnum1, idnum2, lsctype, sdate, police, carnum, cartype
+			,d_option				
+		)
+		values(#{id},#{name},#{nickname},#{gender},#{type}, #{email}
+			,#{ctype},#{company},#{cnum}
+			,#{lscnum},#{idnum1},#{idnum2},#{lsctype},#{sdate},#{police},#{carnum},#{cartype}
+			,#{d_option}
+		)
+	
+	</insert>
+	
+	<select id="selectRoute" resultType="com.ycar.driver.model.Route">
+		select * from D_ROUTE where d_idx = #{d_idx}
+	</select>
+	
+	<update id="updateMyInfo" parameterType="map">
+		update DRIVER
+		<set>
+			<if test="email != null">email = #{email},</if>
+			<if test="d_option != null">d_option = #{d_option},</if>
+			<if test="cartype != null">
+				cartype = #{cartype},
+				carnum = #{carnum}
+			</if>
+		</set> 
+		where d_idx = #{d_idx}
+	</update>
+	
+<!-- 	
+	<update id="updateCompanyInfo">
+		update DRIVER
+		set ctype = #{ctype},
+			company = #{company},
+			cemail = #{cemail}
+		where d_idx = #{d_idx}
+	</update>
+ -->	
+	<update id="updateRoute">
+		update D_ROUTE
+		set type = #{type},
+			place = #{place}
+		where d_idx = #{d_idx}
+	</update>
+	
+	<update id="updateFindPW">
+		update DRIVER
+		set verify = 'N',
+			pw = #{param1}
+		where d_idx = #{param2}
+	</update>
+	
+	<update id="updatePW">
+		update DRIVER
+		set verify = 'Y',
+			pw = #{param1}
+		where d_idx = #{param2}
+	</update>
+</mapper>

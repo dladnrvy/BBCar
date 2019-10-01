@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+/*review list*/
+.card {
+    margin-bottom: 30px;
+}
+.card-header {
+    color: black;
+}
+
+
+/* review list */
+.btn.btn-primary {
+	margin : 0 0 10px 0;
+}	

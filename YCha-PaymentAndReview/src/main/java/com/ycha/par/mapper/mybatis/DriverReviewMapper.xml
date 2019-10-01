@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace: 필수속성! - DAO 에서 식별하기 위함! -->
+<mapper namespace="com.ycha.par.driver.dao.DriverReviewDao">
+	<!-- insert 전 p_idx 조회  -->
+	<select id="selectP_idx" resultType="int">
+		select p_idx 
+		from PAYMENT p
+		join RESERVATION r using (r_idx) 
+		join D_CARPOOL d using (dr_idx) 
+		where p.payidx=#{payidx};
+	</select>
+	
+	<!-- 등록 전, 기존 같은 payidx+작성자 존재 여부 체크  -->
+	<select id="selectReviewRecordByPayidx" resultType="com.ycha.par.domain.Review">
+		select * from REVIEW where payidx=#{param1} and writer=#{param2};
+	</select>
+	
+	<!-- review insert -->
+	<insert id="insertReview" parameterType="com.ycha.par.domain.Review">
+		insert into REVIEW 
+		values (null, #{p_idx}, #{d_idx}, #{payidx}, #{writer}, #{content}, #{star});
+	</insert>
+	
+	<!-- 운전자의  review list -->
+	<select id="selectListByDrivers" resultType="com.ycha.par.domain.ReviewListInfo">
+		select r.rv_idx, p.p_idx, d.d_idx, 
+		r.payidx, r.writer, r.content, r.star, 
+		p.nickname as p_nickname, d.nickname as d_nickname 
+		from REVIEW r
+		join PASSENGER p using(p_idx) 
+		join DRIVER d using(d_idx) 
+		where d.d_idx=#{d_idx};	
+	</select>
+	
+	<!-- 수정할/삭제할 리뷰 존재 확인 -->
+	<select id="selectByRvIdx" resultType="com.ycha.par.domain.Review">
+		select * from REVIEW where rv_idx=#{rv_idx};
+	</select>
+	
+	<!-- 수정처리 -->
+	<update id="editDriverReview" parameterType="com.ycha.par.domain.ReviewEditDriver">
+		update REVIEW 
+		set content = #{content}, star=#{star} 
+		where rv_idx=#{rv_idx};
+	</update>
+	
+	<!-- 삭제처리 -->
+	<delete id="deleteDriverReview">
+		delete from REVIEW where rv_idx=#{rv_idx};
+	</delete>
+</mapper>

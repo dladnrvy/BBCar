@@ -1,0 +1,49 @@
+#form, #findIdForm, #findPwForm {
+	display: none;
+}
+
+.ion-ios-arrow-back {
+	color: darkgray;
+}
+
+.subBtn {
+	color: #514988;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+#modeBtn {
+	background-color: #6258A4;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: bold;
+	color: #FFF;
+	border: 0 !important;
+	outline: 0 !important;
+}
+
+#modeBtn:hover {
+	background-color: #413A6D;
+}
+
+div.pt-5 {
+	margin: 0 auto;
+}
+
+ul.ml-auto>li {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.hero-wrap {
+	margin-bottom: 0;
+	height: 100vh;
+}
+
+#loginBtn {
+	width: 201.200px;
+	margin: 0 auto;
+	margin-bottom: 16px;
+}
+
+#loginBtn img {
+	width: 100%;
+	margin-bottom: 5px;
+}

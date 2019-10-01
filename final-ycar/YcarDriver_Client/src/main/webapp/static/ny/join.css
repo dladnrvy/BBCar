@@ -1,0 +1,193 @@
+     #hiddenform {
+         padding: 0 !important;
+     }
+     @media(max-width: 767.98px){
+         #hiddenform { margin-top: 0; }
+     }
+
+
+     /*------------- common css -------------*/            
+     /* nav bar */    
+    #navbar span{
+        font-size: 13px;
+        color: #fff;
+    }    
+    #navbar a.nav-link{
+        padding-left: 10px;
+        padding-right: 10px;
+    }    
+        
+    /*  background image  */    
+    #bgimage {
+        margin-bottom: 0;
+        height: 100vh;
+    }
+        
+        
+
+     /* 회원가입 폼의 제목 */ 
+     #signUpSelect .form-control,
+     #signUpForm .form-control,
+     #signUpForm2 .form-control,
+     #signUpForm3 .form-control,
+     #signUpForm4 .form-control,
+     #signUpForm5 .form-control {
+         height: 30px !important;
+         line-height: 30px;
+         font-size: 13px;
+         margin-bottom: 8px;
+         color: #000 !important;
+     }
+     
+     /* 회원가입 폼의 제목 */ 
+     #signUpForm .day-wrap,
+     #signUpForm2 .day-wrap, 
+     #signUpForm3 .day-wrap,
+     #signUpForm4 .day-wrap,
+     #signUpForm5 .day-wrap {
+         margin-bottom: 10px;
+     }
+     
+     /* 회원가입 폼의 label */
+     #signUpForm label,
+     #signUpForm2 label,
+     #signUpForm3 label,
+     #signUpForm4 label,
+     #signUpForm5 label {
+         font-size: 15px;
+         margin-bottom: 0.25rem
+     }
+     
+        
+     /* 버튼 */
+     #prev1, #next1,
+     #prev2, #next2,
+     #prev3, #next3, 
+     #prev4, #next4,
+     #prev5, #next5  {
+         padding: 4px 20px !important; 
+         clear: both;
+         font-size: 13px;
+     }
+     
+     #next1,
+     #next2,
+     #next3,
+     #next4,
+     #next5 {
+         float: right;
+     }
+        
+     /* form 디스플레이 관련 */
+     /*#signUpSelect,*/    
+     #signUpForm,
+     #signUpForm2,
+     #signUpForm3,
+     #signUpForm4,
+     #signUpForm5 {
+         display: none;
+     }
+     /*------------- common css end -------------*/
+     
+     /*가입 선택창 + 운전옵션 선택창*/
+     #signUpSelect .form-group,
+     #signUpSelect label,
+     #signUpForm5 .form-group,
+     #signUpForm5 label
+     {
+         width: 100%;
+     }
+     /*가입선택창 */
+     #jtype1,
+     #jtype2,
+     #jtype3,
+     #jtype4 {
+         margin-bottom: 20px !important;
+     }
+     
+     #jtype1 {
+         background-color: #B24CEC !important;
+     }
+     
+     #jtype2 {
+         background-color: #F5CF78 !important;
+     }
+         
+     #jtype3 {
+         background-color: #4DC953 !important;
+     }
+     
+     #jtype4 {
+         background-color: #216AE9 !important;
+     }
+    .warn_red{
+    color: #F03E87;
+    margin: 0;
+    font-size: 12px;
+    margin: 20px 0 8px;
+    }  
+        
+    #idchkbox,
+    #pwchkbox,
+    #pw2chkbox,
+    #emailchkbox {
+        display: none;
+    }    
+ 
+     /*인증 버튼,,,*/
+     #valEmail, #valPaper{
+         padding: 8px 20px !important;
+         font-size: 13px;
+     }
+     #valPaper {
+       float: right;
+     }
+     #echkbox, #pchkbox {
+         display: none;
+     }
+         
+     #joinCode{
+         display: block;
+     }          
+     #cemail, #code {
+         display: inline-block;
+     }
+     
+     #sendCode, #chkCode {
+         float: right;
+         width: inherit;
+         font-size: 13px;
+     }
+
+     #form_paper {
+         display: none;
+     }
+     /*----- 회사 인증 관련----*/
+      #cnameNotice,
+      #verifyNotice {
+          color: #F03E87;
+          margin: 0;
+          font-size: 12px;
+          margin: 20px 0 8px;
+      }
+      #codechkmsg {
+          color: #F03E87;
+          margin: 0;    
+      }
+      #verifyNotice {
+          text-align: center;
+          margin: 0 0 15px;
+      }
+            
+     /*----- 운전옵션선택 페이지 -----*/
+     #signUpForm5 div {
+         width: inherit;
+     }
+     #signUpForm5 .drivechk {
+         display: none;
+     }
+     #signUpForm5 .drivechk:checked ~span {
+         width: inherit;
+         background-color: #B24CEC !important;
+     }  
+              

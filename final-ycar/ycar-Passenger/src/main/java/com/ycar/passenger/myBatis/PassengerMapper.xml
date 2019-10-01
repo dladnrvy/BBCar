@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ycar.passenger.dao.PassengerDao">
+
+	<!-- 로그인, 마이페이지 -->
+	<select id="selectById" resultType="com.ycar.passenger.domain.PassengerInfo">
+	select * from ycar.PASSENGER where id = #{id}
+	</select>
+	
+	<!-- 아이디 찾기 -->
+	<select id="selectByName" resultType="com.ycar.passenger.domain.PassengerInfo">
+	select * from ycar.PASSENGER where name = #{name}
+	</select>
+	
+	<!-- 임시 비밀번호로 변경 -->
+	<update id="updatePw" parameterType="map">
+	update ycar.PASSENGER set pw = #{pw} where id = #{id}
+	</update>
+	
+	<update id="changeVer" parameterType="map">
+	update ycar.PASSENGER set verify = #{verify} where id = #{id}
+	</update>
+	
+	<!-- 회원가입 -->
+	<insert id="insertPassengerSE" parameterType="com.ycar.passenger.domain.PassengerSE" useGeneratedKeys="true" keyProperty="p_idx">
+		insert into ycar.PASSENGER(id, pw, name, nickname, type, email
+			,ctype, company, cemail, p_option, gender					
+		)
+		values(#{id},#{pw},#{name},#{nickname},#{type}, #{email}
+			,#{ctype},#{company},#{cemail},#{p_option},#{gender}
+		)
+	
+	</insert>
+	
+	<!-- 회원가입 -->
+	<insert id="insertPassengerSP" parameterType="com.ycar.passenger.domain.PassengerSP" useGeneratedKeys="true" keyProperty="p_idx">
+		insert into ycar.PASSENGER(id, pw, name, nickname, type, email
+			,ctype, company, cemail, p_option, gender					
+		)
+		values(#{id},#{pw},#{name},#{nickname},#{type}, #{email}
+			,#{ctype},#{company},#{cemail},#{p_option}, #{gender}
+		)
+	
+	</insert>
+</mapper>

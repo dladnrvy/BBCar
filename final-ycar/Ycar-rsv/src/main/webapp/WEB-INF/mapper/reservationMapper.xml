@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ycar.reservation.dao.ReservationDao">
+
+	<resultMap id="carpoolList"
+		type="com.ycar.reservation.domain.Carpool">
+		<id property="dr_idx" column="dr_idx" />
+		<result property="d_idx" column="d_idx" />
+		<result property="d_date" column="d_date" />
+		<result property="d_starttime" column="d_starttime" />
+		<result property="d_endtime" column="d_endtime" />
+		<result property="d_startpoint" column="d_startpoint" />
+		<result property="d_endpoint" column="d_endpoint" />
+		<result property="d_commute" column="d_commute" />
+		<result property="d_fee" column="d_fee" />
+	</resultMap>
+	
+	<resultMap id="rsvList"
+		type="com.ycar.reservation.domain.Reservation">
+		<id property="r_idx" column="r_idx" />
+		<result property="p_idx" column="p_idx" />
+		<result property="dr_idx" column="dr_idx"  />
+		<result property="r_date" column="r_date" />
+		<result property="r_confirm" column="r_confirm" />
+	</resultMap>
+	
+	<!-- D_CARPOOL 예약 가능한 전체 리스트 전체 출력 -->
+	<select id="allCarpoolList" resultType="com.ycar.reservation.domain.Carpool">
+		<![CDATA[ 
+		select distinct c.dr_idx, c.d_idx, c.d_date, c.d_starttime, c.d_endtime, c.d_startpoint, c.d_endpoint, c.d_commute, c.d_fee 
+		from D_CARPOOL c left join RESERVATION r on c.dr_idx = r.dr_idx 
+		where (r.r_confirm is null or r.r_confirm != 'Y') and c.d_date >= curdate()
+		]]>
+	</select>
+	
+	<!-- D_CARPOOL에서 카풀조건 검색!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 이 조건 다시 넣기 and (r.p_idx! =#{p_idx} or r.p_idx is null) -->
+	<select id="searchCarpoolList" resultType="com.ycar.reservation.domain.Carpool">
+		<![CDATA[ 
+		select distinct c.dr_idx, c.d_idx, c.d_date, c.d_starttime, c.d_endtime, c.d_startpoint, c.d_endpoint, c.d_commute, c.d_fee , r.r_idx, r.p_idx
+		from D_CARPOOL c left join RESERVATION r on c.dr_idx = r.dr_idx 
+		where (r.r_confirm is null or r.r_confirm != 'Y') 
+		and c.d_date >= curdate()
+		and c.d_date = #{param1} 
+		and (#{param2} between c.d_starttime and c.d_endtime)
+		and c.d_startpoint like concat('%',#{param3},'%') 
+		and c.d_endpoint like concat('%',#{param4},'%')
+		group by c.dr_idx
+		]]>
+	</select>
+	
+	<!-- D_CARPOOL리스트에서 선택 -->
+	<select id="selectByDr_idx" resultType="com.ycar.reservation.domain.Carpool">
+		select * from D_CARPOOL where dr_idx = #{dr_idx}
+	</select>
+	
+	<!-- RESERVATION DB에 insert -->
+	<insert id="reserve" parameterType="com.ycar.reservation.domain.Reservation">
+		insert into RESERVATION (p_idx, dr_idx, r_confirm) values (#{p_idx}, #{dr_idx}, default)
+	</insert>
+	
+	<!-- mail 발송할 운전자 이메일 받아오기 -->
+	<select id="getDemail" resultType="String">
+		select d.email from DRIVER d join D_CARPOOL c on d.d_idx = c.d_idx where c.dr_idx = #{dr_idx}
+	</select>
+	
+	<!-- RESERVATION DB p_idx별 예약리스트 -->
+<!-- 	<select id="selectByP_idx" resultMap="rsvList">
+		select r.r_idx, r.r_date, d.nickname, c.d_date, c.d_starttime, c.d_endtime, c.d_startpoint, c.d_endpoint, c.d_fee, r.r_confirm
+		from DRIVER d join D_CARPOOL c on d.d_idx = c.d_idx join RESERVATION r on r.dr_idx = c.dr_idx 
+		where r.p_idx=#{p_idx} and c.d_date >= curdate() order by r.r_date asc
+	</select> -->
+	
+	<!-- 예약확정 리스트 출력 -->
+	<select id="confirmListByP_idx" resultType="com.ycar.reservation.domain.MyCarpool">
+		<![CDATA[ 
+		select r.r_idx, r.r_date, d.nickname, c.d_date, c.d_starttime, c.d_endtime, c.d_startpoint, c.d_endpoint, c.d_fee, r.r_confirm, c.dr_idx
+		from DRIVER d join D_CARPOOL c on d.d_idx = c.d_idx join RESERVATION r on r.dr_idx = c.dr_idx 
+		where r.p_idx=#{p_idx} and r_confirm='Y' and c.d_date >= curdate() order by r.r_date asc
+		]]>
+	</select>
+	
+	<!-- 예약대기 리스트 출력 -->
+	<select id="waitingListByP_idx" resultType="com.ycar.reservation.domain.MyCarpool">
+		<![CDATA[ 
+		select r.r_idx, r.r_date, d.nickname, c.d_date, c.d_starttime, c.d_endtime, c.d_startpoint, c.d_endpoint, c.d_fee, r.r_confirm
+		from DRIVER d join D_CARPOOL c on d.d_idx = c.d_idx join RESERVATION r on r.dr_idx = c.dr_idx 
+		where r.p_idx=#{p_idx} and r_confirm='B' and c.d_date >= curdate() order by r.r_date asc
+		]]>
+	</select>
+	
+	<!-- 과거 예역 리스트--> 
+ 	<select id="pastListByP_idx" resultType="com.ycar.reservation.domain.MyCarpool">
+ 		<![CDATA[ 
+ 		select r.r_idx, r.r_date, d.nickname, c.d_date, c.d_starttime, c.d_endtime, c.d_startpoint, c.d_endpoint, c.d_fee, r.r_confirm
+		from DRIVER d join D_CARPOOL c on d.d_idx = c.d_idx join RESERVATION r on r.dr_idx = c.dr_idx 
+		where r.p_idx=#{p_idx} and r_confirm='Y' and c.d_date < curdate() order by r.r_date desc
+		]]>
+	</select>
+	 	
+	<!-- 삭제할 예약 선택  -->
+<!-- 	<select id="selectByR_idx" resultMap="rsvList">
+		select * from RESERVATION where r_idx = ${r_idx}
+	</select> -->
+	
+	<!-- 예약삭제 -->
+	<delete id="delete">
+		delete from RESERVATION where r_idx = #{r_idx}
+	</delete>
+	
+	<!-- R_idx 에 따른 위도 경도 출력 -->
+	<select id="selectlonlat" resultType="com.ycar.reservation.domain.lonlat">
+		select d.d_startlon, d.d_startlat, d.d_endlon, d.d_endlat
+		from D_CARPOOL as d join RESERVATION as r
+		on d.dr_idx = r.dr_idx
+		where r.r_idx = #{r_idx};
+	</select> 
+</mapper>

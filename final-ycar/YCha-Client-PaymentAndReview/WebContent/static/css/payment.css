@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+/* 결제 수단 선택 페이지*/
+#pay_choose {
+    margin-top: 100px;    
+}
+
+@media (max-width: 991.98px) {
+	#pay_choose {
+        margin-top: 0;    
+    }
+}
+
+#payment-choice-section, 
+#pay-success-section, 
+#pay-fail-section {
+	margin-bottom: 0;
+    height: 100vh;	
+}
+
+.payimg {
+	width : 150px;
+	height : 150px;
+	margin: 10px;
+	cursor: pointer;
+}
+
+/* 결제 성공 페이지 */
+#pay-success-div {
+	width : 600px;	
+}
+
+/* 결제 실패 페이지 */
+#pay-fail-div {
+	margin-top: 80px;
+}
+
+#pay-fail {
+	color : red !important;
+}
+
+/* 결제 리스트 */
+.card {
+    margin-bottom: 30px;
+}
+.card-header {
+    color: black;
+}
+
+.card-title {
+	padding-left: 10px;	
+}
+
+.table {
+    min-width: 300px !important;
+}
+
+.table th {
+    width: 50%;
+}
+
+.table tbody tr th, .table tbody tr td {
+    padding: 10px 0;
+}
+
+/* 후기 리스트 페이지 */
+#reviewByDrivers,
+#reviewByPassenger,
+#reviewByMe {
+	height: auto !important;
+	padding : 8em 0 0 0;
+}
+
+/* 후기 수정/삭제 버튼 */
+.rvBtn {
+	margin-right: 5px !important;
+	margin-top: 5px !important;
+	height: 40px !important;
+}

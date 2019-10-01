@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ycha.par.passenger.dao.PassengerPaymentDao">
+	
+	<!-- 결제 진행 전 : 이미 결제된 건이 있는지 확인 -->
+	<select id="selectPaymentByR_idx" resultType="com.ycha.par.domain.Payment">
+		select * from PAYMENT where r_idx= #{r_idx};
+	</select>
+
+	<!-- 결제 전 예약된 운행정보 확인 -->
+	<select id="selectReservationBasicInfo" resultType="com.ycha.par.domain.ReservationBasicInfo">
+		select r.r_idx, r.p_idx, d.d_fee 
+		from RESERVATION r 
+		join D_CARPOOL d using(dr_idx) 
+		where r.r_idx=#{r_idx};
+	</select>
+	
+	<!-- 결제 완료 후 DB 저장 -->
+	<insert id="insertPayRecord">
+		insert into PAYMENT values (null, #{param1}, default, #{param2});
+	</insert>
+	
+	<!-- 결제 + 운행정보 출력 -->
+	<select id="selectOneByRIdx" resultType="com.ycha.par.domain.PaymentDetail">
+		select p.payidx, p.paydate, d.d_distance, d.d_commute, d.d_starttime, 
+		d.d_endtime, d.d_fee, p.paymethod, d.d_startpoint, d.d_endpoint 
+		from PAYMENT p
+		join RESERVATION r using(r_idx) 
+		join D_CARPOOL d using(dr_idx) 
+		where r.r_idx=#{r_idx};
+	</select>
+	
+	<!-- p_idx 통해서 payment list 조회 -->
+	<select id="selectListPassenger" resultType="com.ycha.par.domain.PaymentDetail">
+		select  p.payidx, p.paydate, d.d_distance, d.d_commute, d.d_starttime, d.d_endtime, 
+		d.d_fee, p.paymethod, d.d_startpoint, d.d_endpoint 
+		from PAYMENT p 
+		join RESERVATION r using(r_idx) 
+		join D_CARPOOL d using(dr_idx) 
+		where r.p_idx=#{p_idx};
+	</select>
+</mapper>

@@ -1,0 +1,128 @@
+@charset "UTF-8";
+
+/*
+common settings
+*/
+html, body {
+    background-color: #FFFEF4;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.ftco-intro {
+    background-color: #FFFEF4;
+    margin-bottom: 0;
+    height: 100vh;
+    margin : 0 auto;
+    color : #000;
+}
+
+.ftco-intro .overlay {
+    background: transparent;
+}
+
+
+/*
+buttons
+*/
+
+.ftco-intro h2 {
+	color: #000;
+	text-decoration : none;
+	font-weight : normal;
+	font-size: 24pt;
+}
+
+.btn.btn-primary {
+	border : 0px transparent !important;
+	height : 50px;
+	background: #6258A4;
+	color : #fff !important;
+	margin : 0 auto;
+}
+
+.btn.btn-primary:hover {
+    background: #413A6D;
+    color : #fff !important;
+}
+
+/*
+fonts 
+*/
+
+h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
+    font-family: 'Noto Sans KR', sans-serif;
+    color : #000;
+}
+
+.fnt_basic {
+  color : #000; /*기본 폰트*/
+}
+
+.fnt_warning01 {
+    color : #F03E87 !important; /*빨간색*/
+}
+
+.fnt_warning02 {
+    color : red !important; /*빨간색*/
+}
+
+.fnt_subtitle {
+    color : #a4b0be; /*연회색*/
+}
+
+.fnt_subtitle02 {
+    color : #747d8c; /*중간회색*/
+}
+
+.fnt_subtitle03 {
+    color : #57606f; /*진회색*/
+}
+
+
+/* 
+navbar  
+*/
+
+/*navbar 배경*/
+.ftco-navbar-light {
+	background : #FFFEF4 !important
+}
+
+/*웹 - 네브바 브랜드 */
+.ftco-navbar-light .navbar-brand {
+	color : #000;
+}
+
+/*웹 - 네브바 링크*/
+.ftco-navbar-light .navbar-nav > .nav-item > .nav-link {
+	/*color : rgba(255, 255, 255, 0.6);*/
+    color : #000;
+}
+
+/*웹 - 네브바 hover */
+.ftco-navbar-light .navbar-nav > .nav-item > .nav-link:hover {
+	/*color : rgba(255, 255, 255, 0.6);*/
+    color : #6258A4;
+}
+
+/*웹 - 네브바 스크롤 시 */
+.ftco-navbar-light.scrolled{
+    background-color: #FFFEF4 !important;
+}
+
+/*웹 - 네브바 hover : 밑에 강조표시*/
+.ftco-navbar-light .navbar-nav > .nav-item > .nav-link span:before {
+    background: #6258A4;
+}
+
+/*모바일 네브바 브랜드 색*/
+@media (max-width: 991.98px) {
+	.ftco-navbar-light .navbar-brand {
+    	color: #000 !important;
+	}	
+}
+
+/*모바일 네브바 드랍다운*/
+.ftco-navbar-light .navbar-toggler {
+    color : #6258A4 !important;
+}

@@ -1,0 +1,195 @@
+@charset "UTF-8";
+
+     #hiddenform {
+         padding: 0 !important;
+     }
+     @media(max-width: 767.98px){
+         #hiddenform { margin-top: 0; }
+     }
+     
+    /*------------- mypage css -------------*/          
+        
+    /* nav bar */    
+    #navbar span{
+        font-size: 13px;
+        color: #ccc;
+    }    
+    #navbar a.nav-link{
+        padding-left: 10px;
+        padding-right: 10px;
+    }    
+        
+    /*  background image  */    
+    #bgimage {
+        height: 830px;
+    }
+        
+               
+     /* 마이페이지 폼의 input */
+     #myInfoForm1 .form-control,
+     #myInfoForm2 .form-control,
+     #myInfoForm3 .form-control,
+     #myInfoForm4 .form-control,
+     #myInfoForm5 .form-control,
+     #myInfoForm6 .form-control,
+     #myInfoForm7 .form-control,
+     #myInfoForm8 .form-control{
+         height: 30px !important;
+         line-height: 30px;
+         font-size: 13px;
+         margin-bottom: 8px;
+         color: #000 !important;
+     }
+     
+     /* 마이페이지 폼의 제목 */ 
+     #myInfoForm1 .day-wrap,
+     #myInfoForm2 .day-wrap, 
+     #myInfoForm3 .day-wrap, 
+     #myInfoForm4 .day-wrap, 
+     #myInfoForm5 .day-wrap, 
+     #myInfoForm6 .day-wrap, 
+     #myInfoForm7 .day-wrap, 
+     #myInfoForm8 .day-wrap {
+         margin-bottom: 10px;
+     }
+     
+     /* 마이페이지 폼의 label */
+     #myInfoForm1 label,
+     #myInfoForm2 label,
+     #myInfoForm3 label,
+     #myInfoForm4 label,
+     #myInfoForm5 label,
+     #myInfoForm6 label,
+     #myInfoForm7 label,
+     #myInfoForm8 label {
+         font-size: 13px;
+         margin-bottom: 0.25rem
+     }
+        
+     /*마이페이지 폼의 margin-top */
+     #myInfoForm1,
+     #myInfoForm2,
+     #myInfoForm3,
+     #myInfoForm4,
+     #myInfoForm5,
+     #myInfoForm6,
+     #myInfoForm7,
+     #myInfoForm8 {
+         margin-top: 2.3rem !important;
+     }
+        
+     /*마이페이지 폼 */
+     #hiddenform,
+     #myInfoForm4,
+     #myInfoForm5,
+     #myInfoForm6,
+     #myInfoForm7,
+     #myInfoForm8 {
+         display: none;
+     }    
+     /*------------- common css end -------------*/
+        
+     /* 버튼:: myInfoForm1 */
+    #changeinfo1_1,
+    #changeinfo1_2 {
+         padding: 8px 20px !important; 
+         clear: both;
+         font-size: 13px;
+     }
+        
+     /* 버튼:: myInfoForm2, myInfoForm3 등록및변경버튼 */
+    #changeinfo2, #changeinfo3{
+         padding: 8px 20px !important; 
+         clear: both;
+         font-size: 13px;
+         width: 100%;
+    }
+
+     #changeinfo1_2 {
+         float: right;
+     }
+
+     
+     /*운전옵션 中 보여주는창 +  선택창*/
+     #myInfoForm3 .form-group,
+     #myInfoForm4 .form-group,
+     #myInfoForm8 .form-group,
+     #myInfoForm3 label,
+     #myInfoForm4 label,
+     #myInfoForm8 label
+     {
+         width: 100%;
+     }
+
+     
+     
+    .warn_red{
+    color: #F03E87;
+    margin: 0;
+    font-size: 12px;
+    margin: 20px 0 8px;
+    }  
+        
+    #idchkbox,
+    #pwchkbox,
+    #pw2chkbox,
+    #emailchkbox {
+        display: none;
+    }    
+        
+     /*인증 버튼,,,*/
+     #valEmail, #valPaper{
+         padding: 8px 20px !important;
+         font-size: 13px;
+     }
+     #valPaper {
+       float: right;
+     }
+     #echkbox, #pchkbox {
+         display: none;
+     }
+         
+     #joinCode{
+         display: block;
+     }          
+     #cemail, #code {
+         display: inline-block;
+     }
+     
+     #sendCode, #chkCode {
+         float: right;
+         width: inherit;
+         font-size: 13px;
+     }
+
+     #form_paper {
+         display: none;
+     }
+     /*----- 회사 인증 관련----*/
+      #routeNotice, #optNotice {
+          color: #B24CEC;
+          margin: 0;
+          font-size: 12px;
+          margin: 20px 0 8px;
+      }
+      #codechkmsg {
+          color: #F03E87;
+          margin: 0;    
+      }
+      #verifyNotice {
+          text-align: center;
+          margin: 0 0 15px;
+      }
+            
+     /*----- 운전옵션선택 페이지 -----*/
+     #myInfoForm8 div {
+         width: inherit;
+     }
+     #myInfoForm8 .drivechk {
+         display: none;
+     }
+     #myInfoForm8 .drivechk:checked ~span {
+         width: inherit;
+         background-color: #B24CEC !important;
+     }  
+      

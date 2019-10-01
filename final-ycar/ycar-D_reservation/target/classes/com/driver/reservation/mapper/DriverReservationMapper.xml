@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  
+<mapper namespace="com.driver.reservation.dao.DriverReservationDao">
+
+<resultMap type="com.driver.reservation.domain.DriverReservation" id="drv">
+	<id property="dr_idx" column="dr_idx"/>
+	<result property="r_idx" column="r_idx"/>
+	<result property="d_idx" column="d_idx"/>
+	<result property="d_date" column="d_date"/>
+	<result property="d_startTime" column="d_starttime"/>
+	<result property="d_endTime" column="d_endtime"/>
+	<result property="d_commute" column="d_commute"/>
+	<result property="d_startPoint" column="d_startpoint"/>
+	<result property="d_endPoint" column="d_endpoint"/>
+	<result property="d_fee" column="d_fee"/>
+	<result property="d_distance" column="d_distance"/>
+	<result property="d_startlon" column="d_startlon"/>
+	<result property="d_startlat" column="d_startlat"/>
+	<result property="d_endlon" column="d_endlon"/>
+	<result property="d_endlat" column="d_endlat"/>
+	<result property="nickname" column="nickname"/>
+	<result property="r_confirm" column="r_confirm"/>
+</resultMap>
+
+<insert id="InsertReservation" parameterType="com.driver.reservation.domain.DriverReservation">
+	insert into D_CARPOOL (d_idx,d_date,d_starttime,d_endtime,d_commute,d_startpoint,d_endpoint,d_fee,d_distance,d_startlon,d_startlat,d_endlon,d_endlat) values (#{d_idx},#{d_date},#{d_startTime},#{d_endTime},#{d_commute},#{d_startPoint},#{d_endPoint},#{d_fee},#{d_distance},#{d_startlon},#{d_startlat},#{d_endlon},#{d_endlat})
+</insert>
+
+<!-- 카풀요청 -->
+<select id="mycarpoolB" resultMap="drv">
+	select  r.r_idx, p.nickname, d.d_date, d.d_starttime, d.d_endtime, d.d_startpoint, d.d_endpoint, d.d_commute, d.d_fee, d.d_startlon, d.d_startlat, d.d_endlon, d.d_endlat,r.r_confirm
+	from RESERVATION as r 
+	join D_CARPOOL as d 
+	on d.dr_idx = r.dr_idx
+	join PASSENGER as p 
+	on p.p_idx = r.p_idx 
+	where d.d_idx = #{d_idx} and r.r_confirm = "B" order by d.d_date desc;
+</select>
+
+<!-- 나의카풀 - 수락한내역 -->
+<select id="mycarpoolY" resultMap="drv">
+	select  r.r_idx, p.nickname, d.d_date, d.d_starttime, d.d_endtime, d.d_startpoint, d.d_endpoint, d.d_commute, d.d_fee, d.d_startlon, d.d_startlat, d.d_endlon, d.d_endlat,r.r_confirm
+	from RESERVATION as r 
+	join D_CARPOOL as d 
+	on d.dr_idx = r.dr_idx
+	join PASSENGER as p 
+	on p.p_idx = r.p_idx 
+	where d.d_idx = #{d_idx} and r.r_confirm = "Y" order by d.d_date desc;
+</select>
+
+<!-- 나의카풀 - 등록한 전체 리스트 -->
+<select id="carpoolAllList" resultMap="drv">
+	SELECT d.dr_idx, r.r_idx, d.d_date, d.d_starttime, d.d_endtime, d.d_startpoint, d.d_endpoint, d.d_commute, d.d_fee, d.d_startlon, d.d_startlat, d.d_endlon, d.d_endlat, r.r_confirm
+	FROM ycar.D_CARPOOL as d
+	left join RESERVATION as r
+	on d.dr_idx = r.dr_idx
+	where d_idx = #{d_idx} group by d.dr_idx order by d.d_date desc;
+</select>
+
+<delete id="deleteCarpool">
+	delete from D_CARPOOL where dr_idx= #{dr_idx};
+</delete>
+
+<!-- 예약 거절,취소 -->
+<update id="cancleCarpool" parameterType="com.driver.reservation.domain.DriverReservation">
+	delete from RESERVATION where r_idx = #{r_idx};
+</update>
+
+<!-- 예약 승낙 -->
+<update id="concentCarpool" parameterType="com.driver.reservation.domain.DriverReservation">
+	update RESERVATION set r_confirm = 'Y' where r_idx = #{r_idx};
+</update>
+
+<!-- R_idx 에 따른 위도 경도 출력 -->
+<select id="selectlonlat" resultType="com.driver.reservation.domain.lonlat">
+	select d.d_startlon, d.d_startlat, d.d_endlon, d.d_endlat
+	from D_CARPOOL as d join RESERVATION as r
+	on d.dr_idx = r.dr_idx
+	where r.r_idx = #{r_idx};
+</select>
+
+<!-- 예약 취소 -->
+<!-- <update id="refuseCarpoor" parameterType="drv">
+	update RESERVATION set r_confirm = 'N' where r_idx = #{r_idx};
+</update> -->
+
+
+  
+</mapper>
