@@ -5,24 +5,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.driver.reservation.dao.DriverReservationDao;
+import com.driver.reservation.domain.DriverReservation;
+import com.driver.reservation.domain.lonlat;
 
-@Service("deleteService")
-public class deleteService {
+@Service
+public class SelectLonLat {
 
 	@Autowired
 	private SqlSessionTemplate template;
+	
 	private DriverReservationDao dao;
 	
-	public int deleteCarpoor(int dr_idx) {
+	public lonlat selectlonlat(int r_idx) {
 		
 		dao = template.getMapper(DriverReservationDao.class);
 		
-		System.out.println("삭제) dr_idx  : " + dr_idx);
+		lonlat DR = dao.selectlonlat(r_idx);
 		
-		int cnt = 0;
-		cnt = dao.deleteCarpool(dr_idx);
+		System.out.println("서비스 " + DR);
 		
-		return cnt;
+		
+		return DR;
 	}
-	
 }
