@@ -27,5 +27,5 @@
 #### EC2  
 #### RDS  
 
-### PP
+### PPT
 https://drive.google.com/file/d/1_1OVTik6grzxKbo3_WMnwzl9_Jl6KYHD/view?usp=sharing
